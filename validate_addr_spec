@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require_relative 'address'
+
+$stdin.read.split("\n").each do |address|
+  puts validate_address(address) ? 'ok' : 'ng'
+end
