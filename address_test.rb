@@ -21,6 +21,9 @@ class TestAddress < MiniTest::Unit::TestCase
     "'@example.com",
     "\"'\"@example.com",
 
+    '"a\"b"@example.com',
+    %w{"><script>alert('or/**/2=1#')</script>"@example.com},
+    %w{"d(e)f"@example.com},
   ].each do |address|
     define_method "test_valid_#{address}" do
       assert validate_address(address), "#{address} is expected valid"
@@ -36,6 +39,9 @@ class TestAddress < MiniTest::Unit::TestCase
     '.abc@example.com',
     "ab\\cd@example.com",
     '"a""@example.com',
+
+    '""@example.com',
+
   ].each do |address|
     define_method "test_invalid_#{address}" do
       assert validate_address(address) == false, "#{address} is expected invalid"
